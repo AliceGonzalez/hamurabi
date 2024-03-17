@@ -134,7 +134,7 @@
 //					"FRANKLY, HATE YOUR GUTS!";
 //		else if (percentDied > 3 || acres / population < 10)
 //			answer += "YOUR PERFORMANCE COULD HAVE BEEN SOMEWHAT BETTER, BUT\n" +
-//					"REALLY WASN'T TOO BAD AT ALL.\n" +
+//					"REALLY WASN'T TOO BAD AT ALLz.\n" +
 //					Math.random() * population * .8 + " PEOPLE WOULD" +
 //					"DEARLY LIKE TO SEE YOU ASSASSINATED BUT WE ALL HAVE OUR" +
 //					"TRIVIAL PROBLEMS";
