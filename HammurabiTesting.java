@@ -30,15 +30,4 @@ public class HammurabiTesting {
         Assert.assertEquals(expected,retrievedPopulation);
     }
 
-//    @Test
-//    public final void howManyAcresTest(){
-//        Integer price = 19;
-//        Integer bushels = 10;
-//        Hammurabi hammurabi = new Hammurabi();
-//        Integer expected = 190;
-//
-//        Integer actualBushels = hammurabi.askHowManyAcresToBuy(price,bushels);
-//
-//        Assert.assertEquals(expected, actualBushels);
-//    }
 }
