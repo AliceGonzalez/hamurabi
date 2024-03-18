@@ -44,8 +44,6 @@ public class Hammurabi {
     int acres = 1000;
     int price = 19;
     public boolean plague;
-    int percentDied = 0;
-    int totalDeaths = 0;
     int grainsEaten = 0;
     int acresToHarvest = 0;
 
