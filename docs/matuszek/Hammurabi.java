@@ -157,39 +157,49 @@ public class Hammurabi {
     boolean uprising(int population, int howManyPeopleStarved) {
         //Return true if more than 45% of the people starve. (This will cause you to be immediately thrown out of office, ending the game.)
         double starvationRate = (double) howManyPeopleStarved / population * 100;
-        if (starvationRate > 45) {System.out.println("DUE TO THIS EXTREME MISMANAGEMENT YOU HAVE NOT ONLY\n" + "BEEN IMPEACHED AND THROWN OUT OF OFFICE BUT YOU HAVE\n" + "ALSO BEEN DECLARED PERSONA NON GRATA!!\n");
-        return true;
+        if (starvationRate > 45) {
+            System.out.println("DUE TO THIS EXTREME MISMANAGEMENT YOU HAVE NOT ONLY\n" + "BEEN IMPEACHED AND THROWN OUT OF OFFICE BUT YOU HAVE\n" + "ALSO BEEN DECLARED PERSONA NON GRATA!!\n");
+
+            return true;
         }
         return false;
     }
 
     public int immigrants(int population, int acresOwned, int grainInStorage) {
-        //Nobody will come to the city if people are starving (so don't call this method). If everyone is well fed, compute how many people come to the city as: (20 * _number of acres you have_ + _amount of grain you have in storage_) / (100 * _population_) + 1.
-        //OLD CODE immigrants = (int) (Math.random() * 5 + 1) * (20 * acres + stores) / population / 100 + 1;
-        if(population <= 0 || grainInStorage <= 0){
-            return 0;
-        }
-        int cityVisitors = (int) ((20.0 * acresOwned + bushels) / (100.0 * population)) + 1;
-        return cityVisitors;
+        return ((20 * acresOwned + grainInStorage) / (100 * population)) + 1;
     }
 
-    int harvest(int acres, int bushelsUsedAsSeed){
+    int harvest(int acres, int bushelsUsedAsSeed) {
         //Choose a random integer between 1 and 6, inclusive. Each acre that was planted with seed will yield this many bushels of grain. (Example: if you planted 50 acres, and your number is 3, you harvest 150 bushels of grain). Return the number of bushels harvested.
         Random random = new Random();
         int randomNumber = random.nextInt(6) + 1;
-        return acres * randomNumber;
+        int acresToHarvest = 0;
+        if (bushelsUsedAsSeed % 2 == 0) {
+            acresToHarvest = bushelsUsedAsSeed / 2;
+        } else {
+            acresToHarvest = (bushelsUsedAsSeed - 1) / 2;
+        }
+
+        if (acresToHarvest <= acres) {
+            return acresToHarvest * randomNumber;
+        } else {
+             return acres * randomNumber;
+        }
+
     }
 
     int grainEatenByRats(int bushels) {
-        //There is a 40% chance that you will have a rat infestation. When this happens, rats will eat somewhere between 10% and 30% of your grain. Return the amount of grain eaten by rats (possibly zero).
-//        int ratInfestation = random.nextInt(100) + 1;
-//        int ratsEat = random.nextInt(21) + 10;
-//        int grainsEaten = 0;
-//        if (ratInfestation == true) {
-//            grainsEaten = bushels - ratsEat;
-//
-//
-//        }
+//        There is a 40% chance that you will have a rat infestation. When this happens, 
+//        rats will eat somewhere between 10% and 30% of your grain. Return the amount of 
+//        grain eaten by rats (possibly zero).
+        int ratInfestation = random.nextInt(100) + 1;
+        int ratsEat = random.nextInt(21) + 10;
+        int grainsEaten = 0;
+        if (ratInfestation == true) {
+            grainsEaten = bushels - ratsEat;
+
+
+        }
         return 0;
     }
 
