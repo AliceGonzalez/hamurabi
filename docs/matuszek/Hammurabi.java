@@ -122,11 +122,20 @@ public class Hammurabi {
 
     public int plagueDeaths(int population){
         //Each year, there is a 15% chance of a horrible plague. When this happens, half your people die. Return the number of plague deaths (possibly zero).}
-        if (plague){
-            population = population / 2;
-            System.out.println("A HORRIBLE PLAGUE STRUCK!  HALF THE PEOPLE DIED.\n");
+        int plagueRandom = random.nextInt(100);
+        int peopleDeadInPlague = 0;
+
+        if (plagueRandom < 15){
+            if (population % 2 == 0){
+                peopleDeadInPlague = population / 2;
+                people -= peopleDeadInPlague;
+            } else {
+                peopleDeadInPlague = (population - 1) / 2;
+                people -= peopleDeadInPlague;
+            }
+            System.out.println("A HORRIBLE PLAGUE STRUCK! HALF THE PEOPLE DIED.\n");
         }
-        return population;
+        return peopleDeadInPlague ;
     }
 
     public int starvationDeaths(int population, int bushelsFedToPeople) {
