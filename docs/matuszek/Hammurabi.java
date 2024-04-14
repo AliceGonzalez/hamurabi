@@ -107,24 +107,30 @@ public class Hammurabi {
             }
         }
     }
-    int askHowManyAcresToPlant(int acresOwned, int people, int food) {
+    int askHowManyAcresToPlant(int acresOwned, int people, int bushels) {
         while (true) {
             try {
                 System.out.print("HOW MANY ACRES DO YOU WISH TO PLANT WITH SEED?  ");
                 Integer userInput = scanner.nextInt();
 
-                if (userInput <= acres && userInput <= people * 10 && userInput <= bushels) {
+                int maxAcresByPeople = people * 10; // Each person can farm 10 acres
+                int maxAcresByBushels = bushels / 2; // It takes 2 bushels to farm an acre
+
+                if (userInput <= acresOwned && userInput <= maxAcresByPeople && userInput <= maxAcresByBushels) {
+                    bushels -= userInput * 2; // Deduct the bushels used for planting
                     return userInput;
-                } else if (!(userInput <= acres)){
-                    System.out.println("THINK AGAIN. YOU OWN ONLY " + acres + " ACRES.");
-                } else if (!(userInput <= people * 10)){
-                    System.out.println("THINK AGAIN. YOU HAVE ONLY" + people + "PEOPLE TO TEND THE FIELDS.");
-                } else if (!(userInput <= bushels)){
-                    System.out.println("THINK AGAIN. YOU HAVE ONLY OWN " + bushels + " BUSHELS OF GRAIN.");
+                } else {
+                    if (userInput > acresOwned) {
+                        System.out.println("THINK AGAIN. YOU OWN ONLY " + acres + " ACRES.");
+                    } else if (userInput > maxAcresByPeople) {
+                        System.out.println("THINK AGAIN. YOU HAVE ONLY " + people + " PEOPLE TO TEND THE FIELDS.");
+                    } else if (userInput > maxAcresByBushels) {
+                        System.out.println("THINK AGAIN. YOU HAVE ONLY " + bushels + " BUSHELS OF GRAIN.");
+                    }
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Please enter a valid number!");
-                scanner.next();
+                scanner.next(); // This is necessary to clear the buffer
             }
         }
     }
@@ -147,16 +153,7 @@ public class Hammurabi {
     }
 
     public int starvationDeaths(int population, int bushelsFedToPeople) {
-        int peopleFed = 0;
-        int bushelCounter = bushelsFedToPeople;
-
-        for (int i = 0; i <= population; i++ ){
-            if(bushelCounter >= 20){
-                peopleFed++;
-                bushelCounter -= 20;
-            }
-        }
-
+        int peopleFed = bushelsFedToPeople / 20; // Each person needs 20 bushels
         int peopleStarved = population - peopleFed;
         return peopleStarved;
     }
